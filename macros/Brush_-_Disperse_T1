@@ -1,0 +1,6 @@
+if move.axes[2].userPosition <= 75
+  G90
+  G1 Z75 F1100 ;move z bed for clearance
+  G1 B46 F4000 ; deploy tool brush
+else
+  G1 B46 F4000 ;deply tool brush

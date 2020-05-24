@@ -1,0 +1,4 @@
+;called uppon end of tool wipe
+
+G90            ; ABSOLUTE 
+G1 B0 F4000    ; RETRACT ARM 
