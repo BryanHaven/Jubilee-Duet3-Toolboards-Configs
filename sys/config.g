@@ -15,7 +15,7 @@
 	M586 P2 S1									; Enable Telnet
 
 	; Debugging
-	M111 S0										; Debug off
+	M111 S0										; Debug on
 	M929 P"eventlog.txt" S1						; Start logging to file eventlog.txt
 
 	; General Preferences

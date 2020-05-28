@@ -15,7 +15,7 @@
 	M586 P2 S1									; Enable Telnet
 
 	; Debugging
-	M111 S0										; Debug off
+	M111 S1										; Debug on
 	M929 P"eventlog.txt" S1						; Start logging to file eventlog.txt
 
 	; General Preferences
@@ -79,9 +79,10 @@
 	M906 U1100 I60								; Motor currents (mA) and Idle percentage
 	M906 B650 I60								; Motor currents (mA) and Idle percentage
 	
-	M201 X750 Y750 Z500 E1300 U1000 B50			; Accelerations (mm/s^2)
+	M201 X750 Y750 Z100 E1300 U1000 B50			; Accelerations (mm/s^2)
 	M203 X13000 Y13000 Z1000 E8000 U10000 B5000	; Maximum speeds (mm/min)
-	M566 X480 Y480 Z1000 E3000 U200 B150		; Maximum jerk speeds mm/minute
+	M566 X480 Y480 Z800 E3000 U200 B150			; Maximum jerk speeds mm/minute
+
 	M92 X200 Y200								; Steps/mm for X,Y with 16 tooth pulleys (preferred). 
 	M92 Z3200									; Steps/mm for Z - TR8*4 / 0.9 deg stepper
 	M92 U11.429									; Steps/mm for tool lock geared motor. 
