@@ -1,6 +1,6 @@
 	; Jubilee CoreXY ToolChanging Printer - Config File
 	; This file intended for Duet 3 hardware; 6HC Mainboard; 3HC Expansion Board (CAN 1); Toolboard (CAN 20); Toolboard (CAN 21)
-	; As of 4/08/2020 INCOMPLETE AND ONLY PARTIALLY TESTED.  See the discord for more info. 
+	; As of 11 June, 2020 INCOMPLETE AND ONLY PARTIALLY TESTED.  See the discord for more info. 
 
 	; Name and Identification
 	; Printer name is now set on the R Pi. 
@@ -15,7 +15,7 @@
 	M586 P2 S1									; Enable Telnet
 
 	; Debugging
-	M111 S1										; Debug on
+	M111 S0										; Debug
 	M929 P"eventlog.txt" S1						; Start logging to file eventlog.txt
 
 	; General Preferences
@@ -32,7 +32,7 @@
 	M584 U1 									; U for toolchanger lock
 	M584 Z3:4:5						 			; Z has three drivers for kinematic bed suspension
 
-	M584 B1.0									; Define Swing-Out Nozzle Brush
+	;M584 B1.0									; Define Swing-Out Nozzle Brush
 	
 	; Duet3 Tool Boards | CAN Bus Addresses begin at 20
 	M584 E20.0:21.0								; Define all Extruders on this line 
@@ -49,7 +49,7 @@
 	; End of main board drivers.  Expansion boards have three each.
 
 	; Duet3 3HC Expansion Board CAN Bus Address 1
-	M569 P1.0 S1								; Drive for Swing-Out Brush
+	;M569 P1.0 S1								; Drive for Swing-Out Brush
 	; M568 P1.1 S0
 	; M569 P1.2 S2
 
@@ -92,10 +92,10 @@
 
 
 ; Endstops, Probes, and Axis Limits --------------------------------------------------------------------------------------------------------------------------------------------
-	M574 X1 S1 P"io0.in"						; Set homing switch configuration X1 = low-end, S1 = active-high (NC)
-	M574 Y1 S1 P"io1.in"						; Set homing switch configuration Y1 = low-end, S1 = active-high (NC)
-	M574 U1 S1 P"io3.in"						; Set homing switch configuration Z1 = low-end, S1 = active-high (NC)
-	M574 B1	S1 P"^1.io0.in"						; Set homing switch configuration B1 = low-end, S1 = active-high (NC)
+	M574 X1 S1 P"^io0.in"						; Set homing switch configuration X1 = low-end, S1 = active-high (NC)
+	M574 Y1 S1 P"^io1.in"						; Set homing switch configuration Y1 = low-end, S1 = active-high (NC)
+	M574 U1 S1 P"^io3.in"						; Set homing switch configuration Z1 = low-end, S1 = active-high (NC)
+	;M574 B1	S1 P"^1.io0.in"						; Set homing switch configuration B1 = low-end, S1 = active-high (NC)
 
 	M558 P5 C"io2.in" H3 A1 T6000 S0.02			; Z probe - Set the height of the bed when homing G28.  Combined with content of bed.g as invoked by G32, levels bed. Also used for Mesh 
 												; P5 = Switch, NC
@@ -109,15 +109,15 @@
 												; Tnnn = Travel speed between probe points
 												; Snnn = Tolerance when probing multiple times. Two readings inside this window and we move on
 
-	;M950 J10 C"^io4.in"						; create tool lockup switch
-	;M581 P10 T1 S0 C1							; Set to trigger a pause when toolplate is not locked up while printing
+	M950 J10 C"^io4.in"						; create tool lockup switch
+	
 
-	; Set axis software limits and min/max switch-triggering positions.
+	; Set axis software limits and min/max positions and triggers
 	
 	M208 X-11.5:311.5 Y-44:341 Z-0.2:315		; Adjusted such that (0,0) lies at the lower left corner of a 300x300mm square in the 305mmx305mm build plate
-	M208 U0:200									; Set Elastic Lock (U axis) max rotation angle
-	M208 B0:58									; Set Swing Out Brush Min:Max
-
+	M208 U0:200                                 ; Set Elastic Lock (U axis) max rotation angle
+	;M208 B0:58									; Set Swing Out Brush Min:Max
+	;M581 P10 T1 S0 C1							; Set to trigger a pause when toolplate is not locked up while printing
 
 
 ; Peripherals ---------------------------------------------------------------------------------------------------------------------------------------
@@ -138,7 +138,7 @@
 
 	M501										; Load saved parameters from non-volatile memory
 
-	G29 S1										; Activate last saved bed mesh
+	;G29 S1										; Activate last saved bed mesh - done in homez.g
 
 	; Note: you will need to tune the bed heater, and both extruder cartridges before printing.
 	; See the following link for more details. https://duet3d.dozuki.com/Wiki/Tuning_the_heater_temperature_control

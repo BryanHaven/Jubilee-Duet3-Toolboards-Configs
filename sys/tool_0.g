@@ -8,4 +8,4 @@
 	M106 P5 C"Part Cooling T0"									; Setup Part Cooling Fan as Part Cooling T0
 	M563 P0 S"Tool 0" D0 H1 F5									; Px = Tool number, Dx = Drive Number (start at 0, after movement drives), Hx = Heater Number, Fx = Fan number print cooling fan
 	G10 P0 S0 R0												; Set tool 0 operating and standby temperatures(-273 = "off")
-	M572 D0 S0.025												; Set Pressure Advance On
+	M572 D0 S0.05											    ; Set Pressure Advance On
