@@ -20,10 +20,10 @@
 
 	; General Preferences
 	;M550 P"Jubilee"							; Sets printer name to Jubilee
-	M555 P2										; Set Marlin-style output
-	G21											; Set dimensions to millimetres
-	G90											; Send absolute coordinates...
-	M83											; ...but relative extruder moves
+	M555 P2								        ; Set Marlin-style output
+	G21									; Set dimensions to millimetres
+	G90									; Send absolute coordinates...
+	M83									; ...but relative extruder moves
 
 
 
@@ -69,35 +69,35 @@
 
 
 ; Axis and motor configuration -----------------------------------------------------------------------------------------------------------------------------------
-	M350 X16 Y16 I1								; Set 16x microstepping for CoreXY axes. Use interpolation.
-	M350 U4 I1									; Set 4x for toolchanger lock. Use interpolation.
-	M350 Z16 I1									; Set 16x microstepping for Z axes. Use interpolation.
-	M350 E16 I1									; Set 16x microstepping for Extruder axes. Use interpolation.
-	M350 B16 I1									; Set 16x microstepping for Brush Arm. Use interpolation
+	M350 X16 Y16 I1                                 ; Set 16x microstepping for CoreXY axes. Use interpolation.
+	M350 U4 I1                                      ; Set 4x for toolchanger lock. Use interpolation.
+	M350 Z16 I1                                     ; Set 16x microstepping for Z axes. Use interpolation.
+	M350 E16 I1                                     ; Set 16x microstepping for Extruder axes. Use interpolation.
+	M350 B16 I1                                     ; Set 16x microstepping for Brush Arm. Use interpolation
 
-	M906 X1900 Y1900 Z1700 E1330 I30			; Motor currents (mA) and Idle percentage
-	M906 U1100 I60								; Motor currents (mA) and Idle percentage
-	M906 B650 I60								; Motor currents (mA) and Idle percentage
+	M906 X1900 Y1900 Z1700 E1330 I30                ; Motor currents (mA) and Idle percentage
+	M906 U1100 I60                                  ; Motor currents (mA) and Idle percentage
+	M906 B650 I60                                   ; Motor currents (mA) and Idle percentage
 	
-	M201 X750 Y750 Z100 E1300 U1000 B50			; Accelerations (mm/s^2)
-	M203 X13000 Y13000 Z1000 E8000 U10000 B5000	; Maximum speeds (mm/min)
-	M566 X480 Y480 Z800 E3000 U200 B150			; Maximum jerk speeds mm/minute
+	M201 X750 Y750 Z100 E1300 U1000 B50             ; Accelerations (mm/s^2)
+	M203 X13000 Y13000 Z1000 E8000 U10000 B5000     ; Maximum speeds (mm/min)
+	M566 X480 Y480 Z800 E3000 U200 B150             ; Maximum jerk speeds mm/minute
 
-	M92 X200 Y200								; Steps/mm for X,Y with 16 tooth pulleys (preferred). 
-	M92 Z3200									; Steps/mm for Z - TR8*4 / 0.9 deg stepper
-	M92 U11.429									; Steps/mm for tool lock geared motor. 
-	M92 E400									; Extruder - 0.9 deg/step
-	M92 B83										; Swing-Out Brush
+	M92 X200 Y200                                   ; Steps/mm for X,Y GT2 2mm pitch 16 tooth pulleys, 16x microstepping, 0.9 deg stepper   (preferred). 
+	M92 Z3200                                       ; Steps/mm for Z - T8*2, 16x microstepping, 0.9 deg stepper
+	M92 U11.429                                     ; Steps/mm for tool lock geared motor. 
+	M92 E400                                        ; Extruder - 0.9 deg/step
+	M92 B83                                         ; Swing-Out Brush
 
 
 
 ; Endstops, Probes, and Axis Limits --------------------------------------------------------------------------------------------------------------------------------------------
-	M574 X1 S1 P"^io0.in"						; Set homing switch configuration X1 = low-end, S1 = active-high (NC)
-	M574 Y1 S1 P"^io1.in"						; Set homing switch configuration Y1 = low-end, S1 = active-high (NC)
-	M574 U1 S1 P"^io3.in"						; Set homing switch configuration Z1 = low-end, S1 = active-high (NC)
-	M574 B1	S1 P"^1.io0.in"						; Set homing switch configuration B1 = low-end, S1 = active-high (NC)
+	M574 X1 S1 P"^io0.in"                           ; Set homing switch configuration X1 = low-end, S1 = active-high (NC)
+	M574 Y1 S1 P"^io1.in"                           ; Set homing switch configuration Y1 = low-end, S1 = active-high (NC)
+	M574 U1 S1 P"^io3.in"                           ; Set homing switch configuration Z1 = low-end, S1 = active-high (NC)
+	M574 B1	S1 P"^1.io0.in"                         ; Set homing switch configuration B1 = low-end, S1 = active-high (NC)
 
-	M558 P5 C"io2.in" H3 A1 T6000 S0.02			; Z probe - Set the height of the bed when homing G28.  Combined with content of bed.g as invoked by G32, levels bed. Also used for Mesh 
+	M558 P5 C"io2.in" H3 A1 T6000 S0.02             ; Z probe - Set the height of the bed when homing G28.  Combined with content of bed.g as invoked by G32, levels bed. Also used for Mesh 
 												; P5 = Switch, NC
 												; C  = Input Connector
 												; Hn = dive height
@@ -109,15 +109,15 @@
 												; Tnnn = Travel speed between probe points
 												; Snnn = Tolerance when probing multiple times. Two readings inside this window and we move on
 
-	M950 J10 C"^io4.in"						    ; create tool lockup switch
+	M950 J10 C"^io4.in"                             ; create tool lockup switch
 	
 
 	; Set axis software limits and min/max positions and triggers
 	
-	M208 X-11.5:311.5 Y-44:341 Z-0.2:315		; Adjusted such that (0,0) lies at the lower left corner of a 300x300mm square in the 305mmx305mm build plate
-	M208 U0:200                                 ; Set Elastic Lock (U axis) max rotation angle
-	M208 B0:58									; Set Swing Out Brush Min:Max
-	;M581 P10 T1 S0 C1							; Set to trigger a pause when toolplate is not locked up while printing
+	M208 X-11.5:311.5 Y-44:341 Z-0.2:315            ; Adjusted such that (0,0) lies at the lower left corner of a 300x300mm square in the 305mmx305mm build plate
+	M208 U0:200                                     ; Set Elastic Lock (U axis) max rotation angle
+	M208 B0:58                                      ; Set Swing Out Brush Min:Max
+	;M581 P10 T1 S0 C1                              ; Set to trigger a pause when toolplate is not locked up while printing
 
 
 ; Peripherals ---------------------------------------------------------------------------------------------------------------------------------------
@@ -132,13 +132,13 @@
 
 ; Call Scripts and restore from non-volitile memory --------------------------------------------------------------------------------------------------------------------------------
 
-	M98  P"/sys/Toffsets.g"						; Set tool offsets from the bed. In separate file so test macro can invoke. 
+	M98  P"/sys/Toffsets.g"           ; Set tool offsets from the bed. In separate file so test macro can invoke. 
 
-	;M98 P"config-user.g"						; Load custom user config if one exists.
+	;M98 P"config-user.g"             ; Load custom user config if one exists.
 
-	M501										; Load saved parameters from non-volatile memory
+	M501                              ; Load saved parameters from non-volatile memory
 
-	;G29 S1										; Activate last saved bed mesh - done in homez.g
+	;G29 S1                           ; Activate last saved bed mesh - done in homez.g
 
 	; Note: you will need to tune the bed heater, and both extruder cartridges before printing.
 	; See the following link for more details. https://duet3d.dozuki.com/Wiki/Tuning_the_heater_temperature_control
