@@ -28,38 +28,38 @@
 
 
 ; Axis to driver mapping -----------------------------------------------------------------------------------------------------------------------------------------
-	M584 X0 Y2 									; X and Y for CoreXY
-	M584 U1 									; U for toolchanger lock
-	M584 Z3:4:5						 			; Z has three drivers for kinematic bed suspension
+	M584 X0 Y2                                      ; X and Y for CoreXY
+	M584 U1                                         ; U for toolchanger lock
+	M584 Z3:4:5                                     ; Z has three drivers for kinematic bed suspension
 
-	M584 B1.0									; Define Swing-Out Nozzle Brush
+	M584 B1.0                                       ; Define Swing-Out Nozzle Brush
 	
 	; Duet3 Tool Boards | CAN Bus Addresses begin at 20
-	M584 E20.0:21.0								; Define all Extruders on this line 
+	M584 E20.0:21.0                                 ; Define all Extruders on this line 
 
-	M569 P0 S0									; Drive 0 | X stepper	
-	M569 P2 S0									; Drive 2 | Y Stepper
+	M569 P0 S0                                      ; Drive 0 | X stepper	
+	M569 P2 S0                                      ; Drive 2 | Y Stepper
 
-	M569 P1 S1									; Drive 1 | U Tool Changer Lock	
+	M569 P1 S1                                      ; Drive 1 | U Tool Changer Lock	
 
-	M569 P3 S0									; Drive 3 | Front Left Z
-	M569 P4 S0									; Drive 4 | Back Z
-	M569 P5 S0									; Drive 5 | Front Right Z
+	M569 P3 S0                                      ; Drive 3 | Front Left Z
+	M569 P4 S0                                      ; Drive 4 | Back Z
+	M569 P5 S0					; Drive 5 | Front Right Z
 	
 	; End of main board drivers.  Expansion boards have three each.
 
 	; Duet3 3HC Expansion Board CAN Bus Address 1
-	M569 P1.0 S1								; Drive for Swing-Out Brush
+	M569 P1.0 S1                                    ; Drive for Swing-Out Brush
 	; M568 P1.1 S0
 	; M569 P1.2 S2
 
 	; Tool Boad drivers go here
-	M569 P20.0 D2 S0 								; Drive 20 | Extruder T0
-	M569 P21.0 D2 S0								; Drive 21 | Extruder T1
+	M569 P20.0 D2 S0                                ; Drive 20 | Extruder T0
+	M569 P21.0 D2 S0                                ; Drive 21 | Extruder T1
 
 
 ; Kinematics -----------------------------------------------------------------------------------------------------------------------------------------------------
-	M669 K1										; CoreXY mode
+	M669 K1                                         ; CoreXY mode
 
 	; Kinematic bed ball locations.
 	; Locations are extracted from CAD model assuming lower left build plate corner is (0, 0) on a 305x305mm plate
